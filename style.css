@@ -1,0 +1,21 @@
+body {
+  background-color: #70c5ce;
+}
+
+#score {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#restart-btn {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+#canvas {
+  display: block;
+  margin: 20px auto;
+  background-color: #fff;
+  border: 2px solid #000;
+}
