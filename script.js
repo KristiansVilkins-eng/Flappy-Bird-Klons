@@ -2,15 +2,20 @@ var myGamePiece;
 var myObstacles = [];
 var myScore;
 
+var FLAP_STRENGTH = -2.5;
+
 window.onload = function () {
   startGame();
 };
 
-document.addEventListener("click", accelerate);
-keyInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
+document.addEventListener("click", function () {
+  accelerate(FLAP_STRENGTH);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
     event.preventDefault();
-    accelerate(-0.2);
+    accelerate(FLAP_STRENGTH);
   }
 });
 
@@ -27,9 +32,15 @@ var myGameArea = {
     this.canvas.width = 480;
     this.canvas.height = 270;
     this.context = this.canvas.getContext("2d");
-    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    var canvasHost = document.getElementById("canvas");
+    if (canvasHost) {
+      canvasHost.innerHTML = "";
+      canvasHost.appendChild(this.canvas);
+    } else {
+      document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    }
     this.frameNo = 0;
-    updateGameArea();
+    this.interval = setInterval(updateGameArea, 20);
   },
   clear: function () {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -106,6 +117,7 @@ function updateGameArea() {
   for (i = 0; i < myObstacles.length; i++) {
     if (myGamePiece.crashWith(myObstacles[i])) {
       clearInterval(myGameArea.interval);
+      myGameArea.interval = null;
       alert("Game Over");
       return;
     }
@@ -152,8 +164,6 @@ function everyinterval(n) {
 }
 
 function accelerate(n) {
-  if (!myGameArea.interval) {
-    myGameArea.interval = setInterval(updateGameArea, 20);
-  }
-  myGamePiece.gravitySpeed = n;
+  // Negative value = flap upward
+  myGamePiece.gravitySpeed = typeof n === "number" ? n : FLAP_STRENGTH;
 }
