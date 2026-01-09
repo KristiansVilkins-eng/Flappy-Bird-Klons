@@ -1,8 +1,10 @@
+const restartButton = document.getElementById("restart-btn");
+
 var myGamePiece;
 var myObstacles = [];
 var myScore;
 
-var FLAP_STRENGTH = -2.5;
+var FLAP_STRENGTH = -1.5;
 
 window.onload = function () {
   startGame();
@@ -22,7 +24,7 @@ document.addEventListener("keydown", (event) => {
 function startGame() {
   myGamePiece = new component(30, 30, "red", 10, 120);
   myGamePiece.gravity = 0.05;
-  myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+  myScore = new component("30px", "Consolas", "black", 0, 30, "text");
   myGameArea.start();
 }
 
@@ -154,6 +156,7 @@ function updateGameArea() {
   myScore.update();
   myGamePiece.newPos();
   myGamePiece.update();
+  return;
 }
 
 function everyinterval(n) {
@@ -167,3 +170,7 @@ function accelerate(n) {
   // Negative value = flap upward
   myGamePiece.gravitySpeed = typeof n === "number" ? n : FLAP_STRENGTH;
 }
+
+restartButton.addEventListener("click", () => {
+  window.location.reload();
+});
