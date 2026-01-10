@@ -2,7 +2,7 @@ const restartButton = document.getElementById("restart-btn");
 
 var myGamePiece;
 var myObstacles = [];
-var myScore;
+var myScore = document.getElementById("score");
 
 var FLAP_STRENGTH = -1.5;
 
@@ -24,7 +24,7 @@ document.addEventListener("keydown", (event) => {
 function startGame() {
   myGamePiece = new component(30, 30, "red", 10, 120);
   myGamePiece.gravity = 0.05;
-  myScore = new component("30px", "Consolas", "black", 0, 30, "text");
+  //myScore = new component("30px", "Consolas", "black", 0, 30, "text");
   myGameArea.start();
 }
 
@@ -152,8 +152,9 @@ function updateGameArea() {
     myObstacles[i].update();
   }
 
-  myScore.text = "SCORE: " + myGameArea.frameNo;
-  myScore.update();
+  //myScore.text = "SCORE: " + myGameArea.frameNo;
+  //myScore.update();
+  myScore.textContent = "Score: " + myGameArea.frameNo;
   myGamePiece.newPos();
   myGamePiece.update();
   return;
