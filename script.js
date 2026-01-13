@@ -127,7 +127,7 @@ function updateGameArea() {
   myGameArea.clear();
   myGameArea.frameNo += 1;
 
-  if (myGameArea.frameNo == 1 || everyinterval(150)) {
+  if (myGameArea.frameNo == 1 || everyinterval(50)) {
     x = myGameArea.canvas.width;
     minHeight = 20;
     maxHeight = 200;
@@ -148,7 +148,7 @@ function updateGameArea() {
   });
 
   for (i = 0; i < myObstacles.length; i++) {
-    myObstacles[i].x -= 1;
+    myObstacles[i].x -= 3;
     myObstacles[i].update();
   }
 
