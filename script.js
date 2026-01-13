@@ -82,7 +82,7 @@ function component(width, height, color, x, y, type) {
     var rockbottom = myGameArea.canvas.height - this.height;
     if (this.y > rockbottom) {
       this.y = rockbottom;
-      this.gravitySpeed = 0;
+      this.gravitySpeed = 1;
     }
   };
   this.hitTop = function () {
@@ -127,7 +127,7 @@ function updateGameArea() {
   myGameArea.clear();
   myGameArea.frameNo += 1;
 
-  if (myGameArea.frameNo == 1 || everyinterval(50)) {
+  if (myGameArea.frameNo == 1 || everyinterval(80)) {
     x = myGameArea.canvas.width;
     minHeight = 20;
     maxHeight = 200;
@@ -148,7 +148,7 @@ function updateGameArea() {
   });
 
   for (i = 0; i < myObstacles.length; i++) {
-    myObstacles[i].x -= 3;
+    myObstacles[i].x -= 2;
     myObstacles[i].update();
   }
 
